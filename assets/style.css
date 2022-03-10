@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "Inter";
+    src: url("Inter/Inter-VariableFont_slnt,wght.ttf");
+}
+
+div {
+    font-family: "Inter", "sans-serif";
+}
+
+#main-container {
+    margin-left: 4rem;
+    margin-right: 4rem;
+    margin-top: 3rem;
+}
