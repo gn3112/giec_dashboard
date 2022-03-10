@@ -69,8 +69,12 @@ app.layout = html.Div(
         navbar,
         html.Div([
         dcc.Dropdown(
-            df["Ville"].sort_values(ascending=True), 
-            df["Ville"][0],
+            df["Dpt"].unique(), 
+            df["Dpt"].unique()[0],
+            id="dpt-dropdown"
+            ),
+        dcc.Dropdown(
+            value=df[df["Dpt"] == df["Dpt"].unique()[0]]["Ville"][0],
             id="town-dropdown"
             ),
         dcc.Graph(
@@ -86,6 +90,13 @@ app.layout = html.Div(
     ])
 
 # Callbacks
+@app.callback(
+    Output('town-dropdown', 'options'),
+    Input('dpt-dropdown', 'value'))
+def dpt_station(value):
+    return [{'label': i, 'value': i} for i in df[df["Dpt"] == value]["Ville"].unique()]
+
+
 @app.callback(
     Output('line-plot-monthly', 'figure'),
     Input('town-dropdown', 'value'))
